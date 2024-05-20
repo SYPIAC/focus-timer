@@ -1,0 +1,14 @@
+body {
+  transition: background-color 0.5s ease; /* Smooth transition for background color change */
+}
+input[type="range"] { 
+width: 40%;
+}
+.time-display {
+  font-size: 20px; /* Adjust the font size as needed */  
+}
+.work-status-style
+{
+  font-size: 32px; /* Adjust the font size as needed */  
+  font-weight: bold;
+}

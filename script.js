@@ -71,7 +71,7 @@
     function applyBreakCorrection() {
       const correctionSeconds = parseInt(document.getElementById('breakCorrectionSlider').value);
       breakTime = Math.max(breakTime + correctionSeconds, 0);
-      remainingBreakTime = Math.max(remainingBreakTime + correctionSeconds, 0);
+      remainingBreakTime = remainingBreakTime + correctionSeconds;
       document.getElementById('breakTimeDisplay').innerText = `Break time earned total: ${formatTime(breakTime)}`;
       document.getElementById('breakTimeBudgetDisplay').innerText = `Break time left: ${formatTime(remainingBreakTime)}`;
       document.getElementById('breakCorrectionValue').innerText = correctionSeconds;
@@ -90,7 +90,11 @@
     function applyWorkCorrection() {
       const correctionSeconds = parseInt(document.getElementById('workCorrectionSlider').value);
       elapsedTime = Math.max(elapsedTime + correctionSeconds, 0);
+      breakTime = Math.floor(Math.max(breakTime + (correctionSeconds/3), 0));
+      remainingBreakTime = Math.floor(remainingBreakTime + (correctionSeconds/3));
       document.getElementById('workTimeDisplay').innerText = `Work time: ${formatTime(elapsedTime)}`;
+        document.getElementById('breakTimeDisplay').innerText = `Break time earned: ${formatTime(breakTime)}`;
+        document.getElementById('breakTimeBudgetDisplay').innerText = `Break time left: ${formatTime(remainingBreakTime)}`;      
       document.getElementById('workCorrectionValue').innerText = correctionSeconds;
       document.getElementById('workCorrectionContainer').style.display = 'none'; // Hide the correction slider after applying correction
     }
@@ -98,11 +102,10 @@
     function updateBreakCorrectionValue() {
       const correctionSeconds = parseInt(document.getElementById('breakCorrectionSlider').value);
       document.getElementById('breakCorrectionValue').innerText = formatTime(correctionSeconds);
-      document.getElementById('breakCorrectionChange').innerText = `Change: ${formatTime(correctionSeconds)}`;
     }
 
     function updateWorkCorrectionValue() {
       const correctionSeconds = parseInt(document.getElementById('workCorrectionSlider').value);
       document.getElementById('workCorrectionValue').innerText = formatTime(correctionSeconds);
-      document.getElementById('workCorrectionChange').innerText = `Change: ${formatTime(correctionSeconds)}`;
+      document.getElementById('workCorrectionChange').innerText = `Break time change: ${formatTime(Math.floor(correctionSeconds/3))}`;
     }

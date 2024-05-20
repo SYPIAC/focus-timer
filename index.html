@@ -19,10 +19,9 @@
   
   <button onclick="showBreakCorrectionSlider()">Adjust Break Time</button>
   <div id="breakCorrectionContainer" style="display: none;">
-    <input type="range" id="breakCorrectionSlider" min="-600" max="600" value="0" oninput="updateBreakCorrectionValue()">
+    <input type="range" id="breakCorrectionSlider" min="-600" max="0" value="0" oninput="updateBreakCorrectionValue()">
     <label for="breakCorrectionSlider">Correction: </label><span id="breakCorrectionValue">0</span> 
     <button onclick="applyBreakCorrection()">Apply</button>
-    <div id="breakCorrectionChange">Change: 0 </div>
   </div>
 
   <button onclick="showWorkCorrectionSlider()">Adjust Work Time</button>
@@ -30,7 +29,7 @@
     <input type="range" id="workCorrectionSlider" min="-600" max="600" value="0" oninput="updateWorkCorrectionValue()">
     <label for="workCorrectionSlider">Correction: </label><span id="workCorrectionValue">0</span> 
     <button onclick="applyWorkCorrection()">Apply</button>
-    <div id="workCorrectionChange">Change: 0 </div>
+    <div id="workCorrectionChange">Break time change: 0 </div>
   </div>
   
   <script src="script.js"></script>

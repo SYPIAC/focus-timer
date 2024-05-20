@@ -32,6 +32,24 @@
   <div id="workTimeDisplay">Work time: 00:00:00 </div>
   <div id="breakTimeDisplay">Break time earned total: 00:00:00</div>
   <div id="breakTimeBudgetDisplay">Break time left: 00:00:00</div>
+  
+  <button onclick="showBreakCorrectionSlider()">Adjust Break Time</button>
+  <div id="breakCorrectionContainer" style="display: none;">
+    <input type="range" id="breakCorrectionSlider" min="-3600" max="3600" value="0" oninput="updateBreakCorrectionValue()">
+    <label for="breakCorrectionSlider">Correction: </label><span id="breakCorrectionValue">0</span> seconds
+    <button onclick="applyBreakCorrection()">Apply</button>
+    <div id="breakCorrectionChange">Change: 0 seconds</div>
+  </div>
+
+  <button onclick="showWorkCorrectionSlider()">Adjust Work Time</button>
+  <div id="workCorrectionContainer" style="display: none;">
+    <input type="range" id="workCorrectionSlider" min="-3600" max="3600" value="0" oninput="updateWorkCorrectionValue()">
+    <label for="workCorrectionSlider">Correction: </label><span id="workCorrectionValue">0</span> seconds
+    <button onclick="applyWorkCorrection()">Apply</button>
+    <div id="workCorrectionChange">Change: 0 seconds</div>
+  </div>
+
+
 
   <script>
     let workStartTime = new Date();
@@ -86,6 +104,56 @@
         const sign = totalSeconds < 0 ? '-' : ''; // Add sign for negative times
         return `${sign}${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
     }
+    
+    function showBreakCorrectionSlider() {
+      const breakCorrectionContainer = document.getElementById('breakCorrectionContainer');
+      if (breakCorrectionContainer.style.display === 'block') {
+        breakCorrectionContainer.style.display = 'none';
+      } else {
+        breakCorrectionContainer.style.display = 'block';
+      }
+    }
+
+    function applyBreakCorrection() {
+      const correctionSeconds = parseInt(document.getElementById('breakCorrectionSlider').value);
+      breakTime = Math.max(breakTime + correctionSeconds, 0);
+      remainingBreakTime = Math.max(remainingBreakTime + correctionSeconds, 0);
+      document.getElementById('breakTimeDisplay').innerText = `Break time earned total: ${formatTime(breakTime)}`;
+      document.getElementById('breakTimeBudgetDisplay').innerText = `Break time left: ${formatTime(remainingBreakTime)}`;
+      document.getElementById('breakCorrectionValue').innerText = correctionSeconds;
+      document.getElementById('breakCorrectionContainer').style.display = 'none'; // Hide the correction slider after applying correction
+    }
+
+    function showWorkCorrectionSlider() {
+      const workCorrectionContainer = document.getElementById('workCorrectionContainer');
+      if (workCorrectionContainer.style.display === 'block') {
+        workCorrectionContainer.style.display = 'none';
+      } else {
+        workCorrectionContainer.style.display = 'block';
+      }
+    }
+
+    function applyWorkCorrection() {
+      const correctionSeconds = parseInt(document.getElementById('workCorrectionSlider').value);
+      elapsedTime = Math.max(elapsedTime + correctionSeconds, 0);
+      document.getElementById('workTimeDisplay').innerText = `Work time: ${formatTime(elapsedTime)}`;
+      document.getElementById('workCorrectionValue').innerText = correctionSeconds;
+      document.getElementById('workCorrectionContainer').style.display = 'none'; // Hide the correction slider after applying correction
+    }
+
+    function updateBreakCorrectionValue() {
+      const correctionSeconds = parseInt(document.getElementById('breakCorrectionSlider').value);
+      document.getElementById('breakCorrectionValue').innerText = formatTime(correctionSeconds);
+      document.getElementById('breakCorrectionChange').innerText = `Change: ${formatTime(correctionSeconds)}`;
+    }
+
+    function updateWorkCorrectionValue() {
+      const correctionSeconds = parseInt(document.getElementById('workCorrectionSlider').value);
+      document.getElementById('workCorrectionValue').innerText = formatTime(correctionSeconds);
+      document.getElementById('workCorrectionChange').innerText = `Change: ${formatTime(correctionSeconds)}`;
+    }
+
+
 
   </script>
 </body>

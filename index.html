@@ -26,7 +26,7 @@
   <h1>Custom Focus Timer</h1>
   <div>Every 3 seconds working earns 1 second break</div>
   <button onclick="startWork()">Start Work</button>
-  <button onclick="endWork()">End Work</button>
+  <button onclick="pauseWork()">Pause Work</button>
   <button onclick="startBreak()">Start Break</button>
   <div id="timerDisplay"></div>
   <div id="workTimeDisplay">Work time: 00:00:00 </div>
@@ -49,15 +49,11 @@
       document.body.style.backgroundColor = 'lightcoral'; // Change background to redish color
     }
 
-    function endWork() {
+    function pauseWork() {
       clearInterval(workInterval);
       clearInterval(breakInterval);
-      workEndTime = new Date();
-      let workDuration = (workEndTime - workStartTime) / 1000; // duration in seconds
-      elapsedTime = 0; breakTime = 0; remainingBreakTime = 0;
-      document.getElementById('timerDisplay').innerText = `Work ended.`;
-      document.getElementById('breakTimeDisplay').innerText = `Break time earned: ${formatTime(breakTime)}`;
-      document.getElementById('breakTimeBudgetDisplay').innerText = `Break time left: ${formatTime(remainingBreakTime)}`;
+      document.body.style.backgroundColor = ''; // Clear background color
+      document.getElementById('timerDisplay').innerText = `Work paused.`;
     }
 
     function startBreak() {

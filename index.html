@@ -8,18 +8,8 @@
     body {
       transition: background-color 0.5s ease; /* Smooth transition for background color change */
     }
-    table {
-      border-collapse: collapse;
-      width: 100%;
-    }
-    th, td {
-      border: 1px solid #dddddd;
-      text-align: left;
-      padding: 8px;
-    }
-    th {
-      background-color: #f2f2f2;
-    }    
+    input[type="range"] { width: 40%; }
+}
   </style>
 </head>
 <body>
@@ -35,18 +25,18 @@
   
   <button onclick="showBreakCorrectionSlider()">Adjust Break Time</button>
   <div id="breakCorrectionContainer" style="display: none;">
-    <input type="range" id="breakCorrectionSlider" min="-3600" max="3600" value="0" oninput="updateBreakCorrectionValue()">
-    <label for="breakCorrectionSlider">Correction: </label><span id="breakCorrectionValue">0</span> seconds
+    <input type="range" id="breakCorrectionSlider" min="-600" max="600" value="0" oninput="updateBreakCorrectionValue()">
+    <label for="breakCorrectionSlider">Correction: </label><span id="breakCorrectionValue">0</span> 
     <button onclick="applyBreakCorrection()">Apply</button>
-    <div id="breakCorrectionChange">Change: 0 seconds</div>
+    <div id="breakCorrectionChange">Change: 0 </div>
   </div>
 
   <button onclick="showWorkCorrectionSlider()">Adjust Work Time</button>
   <div id="workCorrectionContainer" style="display: none;">
-    <input type="range" id="workCorrectionSlider" min="-3600" max="3600" value="0" oninput="updateWorkCorrectionValue()">
-    <label for="workCorrectionSlider">Correction: </label><span id="workCorrectionValue">0</span> seconds
+    <input type="range" id="workCorrectionSlider" min="-600" max="600" value="0" oninput="updateWorkCorrectionValue()">
+    <label for="workCorrectionSlider">Correction: </label><span id="workCorrectionValue">0</span> 
     <button onclick="applyWorkCorrection()">Apply</button>
-    <div id="workCorrectionChange">Change: 0 seconds</div>
+    <div id="workCorrectionChange">Change: 0 </div>
   </div>
 
 

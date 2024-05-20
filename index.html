@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Custom Focus Timer</title>
+</head>
+<body>
+  <h1>Custom Focus Timer</h1>
+  <button onclick="startWork()">Start Work</button>
+  <button onclick="endWork()">End Work</button>
+  <button onclick="startBreak()">Start Break</button>
+  <div id="timerDisplay"></div>
+
+  <script>
+    let workStartTime;
+    let workEndTime;
+    let breakTime;
+
+    function startWork() {
+      workStartTime = new Date();
+      document.getElementById('timerDisplay').innerText = "Work started...";
+    }
+
+    function endWork() {
+      workEndTime = new Date();
+      let workDuration = (workEndTime - workStartTime) / 1000; // duration in seconds
+      breakTime = workDuration / 3;
+      document.getElementById('timerDisplay').innerText = `Work ended. You can take a break for up to ${Math.round(breakTime)} seconds.`;
+    }
+
+    function startBreak() {
+      if (!breakTime) {
+        alert("You need to end your work first.");
+        return;
+      }
+      document.getElementById('timerDisplay').innerText = `Break started. You have ${Math.round(breakTime)} seconds.`;
+      setTimeout(() => {
+        document.getElementById('timerDisplay').innerText = "Break over!";
+      }, breakTime * 1000);
+    }
+  </script>
+</body>
+</html>

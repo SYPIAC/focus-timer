@@ -9,6 +9,14 @@
       transition: background-color 0.5s ease; /* Smooth transition for background color change */
     }
     input[type="range"] { width: 40%; }
+    .time-display {
+      font-size: 20px; /* Adjust the font size as needed */  
+    }
+    .work-status-style
+    {
+      font-size: 32px; /* Adjust the font size as needed */  
+      font-weight: bold;
+    }
 }
   </style>
 </head>
@@ -18,10 +26,10 @@
   <button onclick="startWork()">Start Work</button>
   <button onclick="pauseWork()">Pause Work</button>
   <button onclick="startBreak()">Start Break</button>
-  <div id="timerDisplay"></div>
-  <div id="workTimeDisplay">Work time: 00:00:00 </div>
-  <div id="breakTimeDisplay">Break time earned total: 00:00:00</div>
-  <div id="breakTimeBudgetDisplay">Break time left: 00:00:00</div>
+  <div id="timerDisplay" class="work-status-style"></div>
+  <div id="workTimeDisplay" class="time-display">Work time: 00:00:00 </div>
+  <div id="breakTimeDisplay" class="time-display">Break time earned total: 00:00:00</div>
+  <div id="breakTimeBudgetDisplay" class="time-display">Break time left: 00:00:00</div>
   
   <button onclick="showBreakCorrectionSlider()">Adjust Break Time</button>
   <div id="breakCorrectionContainer" style="display: none;">
@@ -52,7 +60,7 @@
 
     function startWork() {
       clearInterval(breakInterval);
-      document.getElementById('timerDisplay').innerText = "WORKING";
+      document.getElementById('timerDisplay').innerText = "Working...";
       workInterval = setInterval(updateWorkTime, 1000); // Update every second
       document.body.style.backgroundColor = 'lightcoral'; // Change background to redish color
     }
@@ -61,12 +69,12 @@
       clearInterval(workInterval);
       clearInterval(breakInterval);
       document.body.style.backgroundColor = ''; // Clear background color
-      document.getElementById('timerDisplay').innerText = `Work paused.`;
+      document.getElementById('timerDisplay').innerText = `Work paused`;
     }
 
     function startBreak() {
       clearInterval(workInterval);
-      document.getElementById('timerDisplay').innerText = `BREAK TIME`;
+      document.getElementById('timerDisplay').innerText = `Break time...`;
       document.body.style.backgroundColor = 'lightblue'; // Change background to light blue color
       breakInterval = setInterval(updateBreakTime, 1000);
     }
@@ -84,6 +92,14 @@
 
     function updateBreakTime() {
       remainingBreakTime -= 1;
+      if(remainingBreakTime<=0)
+      {
+        document.getElementById('timerDisplay').innerText = `Break time... Negative`;
+      }
+      else
+      {
+        document.getElementById('timerDisplay').innerText = `Break time...`;
+      }
       document.getElementById('breakTimeBudgetDisplay').innerText = `Break time left: ${formatTime(remainingBreakTime)}`;
     }
 
